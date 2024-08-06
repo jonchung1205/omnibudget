@@ -1,1 +1,3 @@
-# google-chrome-travel-budgeting-extension
+# OmniBudget (Google Chrome Budgeting Extension)
+
+
