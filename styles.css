@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  width: calc(100% - 12px);
+}
+
+button {
+  padding: 5px;
+  width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
