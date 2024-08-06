@@ -1,35 +1,69 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #343a40;
+  padding: 20px;
   width: 300px;
-  padding: 10px;
+  height: 500px;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevents overflow */
 }
 
 h1 {
-  font-size: 18px;
-}
-
-form {
+  font-weight: 300;
   margin-bottom: 20px;
+  font-size: 1.5rem;
 }
 
-input {
-  margin-bottom: 10px;
-  padding: 5px;
-  width: calc(100% - 12px);
+.form-control, .btn {
+  border-radius: 50px;
 }
 
-button {
-  padding: 5px;
+.btn {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(45deg, #0056b3, #0096d6);
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed; /* Ensures the table fits within the container */
+  font-size: 0.5rem
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word; /* Ensures long text wraps within the cell */
 }
 
-li {
-  margin-bottom: 5px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#chartContainer {
+  width: 100%;
+  max-width: 250px;
+  margin: 20px auto;
 }
