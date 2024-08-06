@@ -3,7 +3,7 @@ body {
   background-color: #f8f9fa;
   color: #343a40;
   padding: 20px;
-  width: 300px;
+  width: 400px; /* Increased width */
   height: 500px;
   box-sizing: border-box; /* Ensures padding is included in the width */
 }
@@ -47,7 +47,7 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   table-layout: fixed; /* Ensures the table fits within the container */
-  font-size: 0.5rem
+  font-size: 0.9rem; /* Adjusted font size */
 }
 
 th, td {
@@ -64,6 +64,6 @@ th {
 
 #chartContainer {
   width: 100%;
-  max-width: 250px;
+  max-width: 350px; /* Increased max-width */
   margin: 20px auto;
 }
