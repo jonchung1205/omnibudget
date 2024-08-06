@@ -1,113 +1,65 @@
-document.getElementById('budgetForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const budgetForm = document.getElementById('budgetForm');
+    const budgetList = document.getElementById('budgetList');
+    const spendingTable = document.getElementById('spendingTable').getElementsByTagName('tbody')[0];
+    const totalSpending = document.getElementById('totalSpending');
+    const currencySelect = document.getElementById('currency');
   
-    const name = document.getElementById('name').value;
-    const price = parseFloat(document.getElementById('price').value);
-    const category = document.getElementById('category').value;
+    let budgetItems = [];
   
-    chrome.storage.local.get({budget: {}}, function(data) {
-      const budget = data.budget;
+    budgetForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const price = parseFloat(document.getElementById('price').value);
+      const category = document.getElementById('category').value;
+      const currency = currencySelect.value;
   
-      if (!budget[category]) {
-        budget[category] = [];
-      }
-  
-      budget[category].push({name, price});
-      chrome.storage.local.set({budget}, function() {
-        displayBudget();
-      });
+      const item = { name, price, category, currency };
+      budgetItems.push(item);
+      updateBudgetList();
+      updateSpendingTable();
+      budgetForm.reset();
     });
   
-    document.getElementById('budgetForm').reset();
+    function updateBudgetList() {
+      budgetList.innerHTML = '';
+      budgetItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'category';
+        div.innerHTML = `${item.name} - ${item.price.toFixed(2)} ${item.currency} <span class="delete-btn" data-index="${index}">×</span>`;
+        budgetList.appendChild(div);
+      });
+  
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = this.getAttribute('data-index');
+          budgetItems.splice(index, 1);
+          updateBudgetList();
+          updateSpendingTable();
+        });
+      });
+    }
+  
+    function updateSpendingTable() {
+      spendingTable.innerHTML = '';
+      const categoryTotals = budgetItems.reduce((acc, item) => {
+        acc[item.category] = (acc[item.category] || 0) + item.price;
+        return acc;
+      }, {});
+  
+      let total = 0;
+      for (const category in categoryTotals) {
+        total += categoryTotals[category];
+      }
+  
+      for (const category in categoryTotals) {
+        const row = spendingTable.insertRow();
+        row.insertCell(0).textContent = category;
+        row.insertCell(1).textContent = categoryTotals[category].toFixed(2);
+        row.insertCell(2).textContent = ((categoryTotals[category] / total) * 100).toFixed(2) + '%';
+      }
+  
+      totalSpending.textContent = total.toFixed(2);
+    }
   });
-  
-  document.getElementById('currency').addEventListener('change', displayBudget);
-  
-  function displayBudget() {
-    const selectedCurrency = document.getElementById('currency').value;
-    fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
-      .then(response => response.json())
-      .then(data => {
-        const exchangeRate = data.rates[selectedCurrency];
-        chrome.storage.local.get({budget: {}}, function(data) {
-          const budget = data.budget;
-          const budgetList = document.getElementById('budgetList');
-          const totalSpendingCell = document.getElementById('totalSpending');
-          const spendingTableBody = document.getElementById('spendingTable').querySelector('tbody');
-          budgetList.innerHTML = '';
-          spendingTableBody.innerHTML = '';
-          let total = 0;
-          const categoryTotals = {};
-  
-          for (const category in budget) {
-            const categoryDiv = document.createElement('div');
-            categoryDiv.className = 'category';
-            categoryDiv.innerHTML = `<h2>${category}</h2>`;
-  
-            const items = budget[category];
-            items.forEach((item, index) => {
-              const itemDiv = document.createElement('div');
-              const convertedPrice = item.price * exchangeRate;
-              itemDiv.textContent = `${item.name}: ${selectedCurrency} ${formatNumber(convertedPrice)}`;
-              total += convertedPrice;
-  
-              if (!categoryTotals[category]) {
-                categoryTotals[category] = 0;
-              }
-              categoryTotals[category] += convertedPrice;
-  
-              const deleteBtn = document.createElement('span');
-              deleteBtn.textContent = 'Delete';
-              deleteBtn.className = 'delete-btn';
-              deleteBtn.addEventListener('click', function() {
-                deletePurchase(category, index);
-              });
-  
-              itemDiv.appendChild(deleteBtn);
-              categoryDiv.appendChild(itemDiv);
-            });
-  
-            budgetList.appendChild(categoryDiv);
-          }
-  
-          totalSpendingCell.textContent = `${selectedCurrency} ${formatNumber(total)}`;
-  
-          for (const category in categoryTotals) {
-            const row = document.createElement('tr');
-            const categoryCell = document.createElement('td');
-            categoryCell.textContent = category;
-            const spendingCell = document.createElement('td');
-            spendingCell.textContent = `${selectedCurrency} ${formatNumber(categoryTotals[category])}`;
-            const percentageCell = document.createElement('td');
-            const percentage = ((categoryTotals[category] / total) * 100).toFixed(2);
-            percentageCell.textContent = `${percentage}%`;
-            row.appendChild(categoryCell);
-            row.appendChild(spendingCell);
-            row.appendChild(percentageCell);
-            spendingTableBody.appendChild(row);
-          }
-        });
-      });
-  }
-  
-  function deletePurchase(category, index) {
-    chrome.storage.local.get({budget: {}}, function(data) {
-      const budget = data.budget;
-      if (budget[category]) {
-        budget[category].splice(index, 1);
-        if (budget[category].length === 0) {
-          delete budget[category];
-        }
-        chrome.storage.local.set({budget}, function() {
-          displayBudget();
-        });
-      }
-    });
-  }
-  
-  function formatNumber(number) {
-    return new Intl.NumberFormat().format(number.toFixed(2));
-  }
-  
-  document.addEventListener('DOMContentLoaded', displayBudget);
   

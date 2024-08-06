@@ -4,13 +4,60 @@
   <title>Travel Budgeter</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .category { margin-top: 10px; }
-    .delete-btn { margin-left: 10px; color: red; cursor: pointer; }
-    #chartContainer { width: 100%; max-width: 600px; margin: 20px auto; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
+    body { 
+      font-family: 'Helvetica Neue', Arial, sans-serif; 
+      background-color: #f8f9fa; 
+      color: #343a40; 
+      padding: 20px; 
+      width: 300px; 
+      height: 500px; 
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-weight: 300;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    .form-control, .btn {
+      border-radius: 50px;
+    }
+    .btn {
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(45deg, #0056b3, #0096d6);
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    #chartContainer {
+      width: 100%;
+      max-width: 250px;
+      margin: 20px auto;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +95,6 @@
         <option value="CHF">CHF</option>
         <option value="CNY">CNY</option>
         <option value="INR">INR</option>
-        <!-- Add more currencies as needed -->
       </select>
     </div>
     <div id="budgetList"></div>
