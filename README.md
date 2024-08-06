@@ -1,1 +1,1 @@
-# budgeting-extension
+# google-chrome-travel-budgeting-extension
