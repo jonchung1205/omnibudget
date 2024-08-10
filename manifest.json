@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Travel Budgeter",
+    "name": "OmniBudget",
     "version": "1.0",
-    "description": "A simple travel budgeting tool.",
+    "description": "A travel budgeting tool and on the go solution",
     "permissions": ["storage", "https://api.exchangerate-api.com/*"],
     "action": {
       "default_popup": "popup.html",
