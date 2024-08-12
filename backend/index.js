@@ -19,8 +19,8 @@ const User = mongoose.model('User', userSchema);
 
 // Passport Config
 passport.use(new GoogleStrategy({
-  clientID: 'YOUR_GOOGLE_CLIENT_ID',
-  clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
+  clientID: '237666779637-p84u25omi5hv78g52hdf9gnfk63551do.apps.googleusercontent.com',
+  clientSecret: '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',
   callbackURL: '/auth/google/callback'
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ googleId: profile.id }, (err, user) => {
