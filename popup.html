@@ -4,67 +4,75 @@
         <title>OmniBudget</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css">
-      </head>
+    </head>
       
-<body>
-  <div class="container">
-    <h1 class="text-center">OmniBudget</h1>
-    <form id="budgetForm" class="mb-4">
-      <div class="form-group">
-        <input type="text" id="name" class="form-control" placeholder="Purchase Name" required>
-      </div>
-      <div class="form-group">
-        <input type="number" id="price" class="form-control" placeholder="Price" step="0.01" required>
-      </div>
-      <div class="form-group">
-        <select id="category" class="form-control" required>
-          <option value="" disabled selected>Category</option>
-          <option value="Flight">Flight</option>
-          <option value="Hotel">Hotel</option>
-          <option value="Rentals">Rentals</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Food">Food</option>
-          <option value="Miscellaneous">Miscellaneous</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">Confirm</button>
-    </form>
-    <div class="form-group">
-      <label for="currency">Select Currency:</label>
-      <select id="currency" class="form-control">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="JPY">JPY</option>
-        <option value="GBP">GBP</option>
-        <option value="AUD">AUD</option>
-        <option value="CAD">CAD</option>
-        <option value="CHF">CHF</option>
-        <option value="CNY">CNY</option>
-        <option value="INR">INR</option>
-      </select>
-    </div>
-    <div id="budgetList"></div>
-    <div id="chartContainer">
-      <table id="spendingTable" class="table table-striped">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Spending</th>
-            <th>Percentage</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-          <tr>
-            <th>Total</th>
-            <th id="totalSpending"></th>
-            <th>100%</th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-  <script src="popup.js"></script>
-</body>
+    <body>
+        <div class="container">
+            <h1 class="text-center">OmniBudget</h1>
+            <h3 class="text-center">Current Budget: <span id="currentBudgetName">Default Budget</span></h3>
+            <button id="newBudgetBtn" class="btn btn-success btn-block mb-3">Create New Budget</button>
+            <div class="form-group">
+                <label for="savedBudgets">View Saved Budgets:</label>
+                <ul id="savedBudgetsList" class="list-group">
+                  <!-- Saved budgets will be dynamically added here -->
+                </ul>
+            </div>
+            <form id="budgetForm" class="mb-4">
+                <div class="form-group">
+                    <input type="text" id="name" class="form-control" placeholder="Purchase Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" id="price" class="form-control" placeholder="Price" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <select id="category" class="form-control" required>
+                        <option value="" disabled selected>Category</option>
+                        <option value="Flight">Flight</option>
+                        <option value="Hotel">Hotel</option>
+                        <option value="Rentals">Rentals</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Food">Food</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Confirm</button>
+            </form>
+            <div class="form-group">
+                <label for="currency">Select Currency:</label>
+                <select id="currency" class="form-control">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="JPY">JPY</option>
+                    <option value="GBP">GBP</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="CNY">CNY</option>
+                    <option value="INR">INR</option>
+                </select>
+            </div>
+            <div id="budgetList"></div>
+            <div id="chartContainer">
+                <table id="spendingTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Spending</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total</th>
+                            <th id="totalSpending"></th>
+                            <th>100%</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <script src="popup.js"></script>
+    </body>
 </html>
